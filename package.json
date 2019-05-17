@@ -12,6 +12,7 @@
     "expo": "^31.0.2",
     "expo-cli": "^2.17.2",
     "global": "^4.3.2",
+    "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",

@@ -24,7 +24,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.diogofgr.paroledelcazzo"
+    },
+    "android": {
+      "package": "com.diogofgr.paroledelcazzo"
     },
     "githubUrl": "https://github.com/diogofgr/ParoleDelCazzo"
   }

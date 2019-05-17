@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { shuffle } from 'lodash';
 import wordBank from './wordBank';
 import Question from './components/Question';
 
@@ -9,6 +10,7 @@ class GameScreen extends Component {
     state = {
         step: 0,
         score: wordBank.length * maxFailedAttempt,
+        shuffledWords: shuffle(wordBank)
     };
 
     static navigationOptions = ({ navigation }) => {
@@ -35,7 +37,7 @@ class GameScreen extends Component {
         }
     }
 
-    handleLoosePoints = () => {
+    handleLosePoints = () => {
         this.setState(state => ({ score: --state.score }));
     }
 
@@ -49,16 +51,16 @@ class GameScreen extends Component {
     }
 
     render() {
-        const { step } = this.state;
+        const { step, shuffledWords } = this.state;
         return (
             <View style={styles.container}>
-                { wordBank.map((word, index) => {
+                { shuffledWords.map((word, index) => {
                     if (index !== step ) return null;
                     return (
                         <Question 
                             key={word.word} 
                             word={word} 
-                            onWrongAnswer={this.handleLoosePoints} 
+                            onWrongAnswer={this.handleLosePoints} 
                             onNextStep={this.handleNextStep} 
                         />
                     );
