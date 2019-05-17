@@ -6,11 +6,16 @@ import Question from './components/Question';
 const maxFailedAttempt = 3;
 
 class GameScreen extends Component {
-      
     state = {
         step: 0,
         score: wordBank.length * maxFailedAttempt,
-    }
+    };
+
+    static navigationOptions = ({ navigation }) => {
+        return {
+          title: `Parola Del Cazzo ${navigation.getParam('currentStepPlusOne', '1')}/${wordBank.length}`,
+        };
+      };
 
     handleNextStep = () => {
         const { step, score } = this.state;
@@ -20,7 +25,13 @@ class GameScreen extends Component {
             navigate('Home', { prevScore: score });
         } else {
             // Go to next step (next question)
-            this.setState(state => ({ step: ++state.step }))
+            // update current step on header after setState
+            this.setState(
+                state => ({
+                    step: ++state.step
+                }),
+                () => this.props.navigation.setParams({currentStepPlusOne: this.state.step + 1})
+            )
         }
     }
 
@@ -39,7 +50,6 @@ class GameScreen extends Component {
 
     render() {
         const { step } = this.state;
-
         return (
             <View style={styles.container}>
                 { wordBank.map((word, index) => {
